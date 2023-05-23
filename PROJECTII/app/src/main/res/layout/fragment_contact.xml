@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_owner_name"
+        android:layout_width="match_parent"
+        android:layout_height="121dp"
+        android:text="NAME:  SAUJAN KHANAL"
+        android:textColor="#FF0000"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_owner_number"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="PHONE: 9844996725"
+        android:textColor="#00FF00"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_owner_email"
+        android:layout_width="match_parent"
+        android:layout_height="116dp"
+        android:text="EMAIL: saujankhanal003@gmail.com"
+        android:textColor="#0000FF"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/mess"
+        android:layout_width="match_parent"
+        android:layout_height="116dp"
+        android:text="LOGIN FOR DIRECT CONTACT"
+        android:textColor="#FF0000"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+
+
+</LinearLayout>
