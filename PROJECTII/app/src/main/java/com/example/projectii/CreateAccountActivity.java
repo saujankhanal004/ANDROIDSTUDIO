@@ -13,42 +13,41 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity {
-    private EditText usernameEditText, passwordEditText;
-    private Button loginButton;
+public class CreateAccountActivity extends AppCompatActivity {
+    private EditText emailEditText, passwordEditText;
+    private Button createAccountButton;
     private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_createaccount);
 
-        usernameEditText = findViewById(R.id.et_username);
+        emailEditText = findViewById(R.id.et_email);
         passwordEditText = findViewById(R.id.et_password);
-        loginButton = findViewById(R.id.btn_login);
+        createAccountButton = findViewById(R.id.btn_create_account);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = usernameEditText.getText().toString().trim();
+                String email = emailEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
 
-                // Authenticate user
-                firebaseAuth.signInWithEmailAndPassword(username, password)
-                        .addOnCompleteListener(LoginActivity.this, task -> {
+                // Create a new user account
+                firebaseAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(CreateAccountActivity.this, task -> {
                             if (task.isSuccessful()) {
-                                // Login success
+                                // Account creation success
                                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                                Toast.makeText(LoginActivity.this, "Login successful.", Toast.LENGTH_SHORT).show();
-                                // Proceed to the next activity
-                                startActivity(new Intent(LoginActivity.this, Login_home.class));
+                                Toast.makeText(CreateAccountActivity.this, "Account created successfully.", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(CreateAccountActivity.this, LoginActivity.class));
                                 finish();
                             } else {
-                                // Login failed
+                                // Account creation failed
                                 FirebaseAuthException e = (FirebaseAuthException) task.getException();
-                                Toast.makeText(LoginActivity.this, "Login failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CreateAccountActivity.this, "Account creation failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
             }

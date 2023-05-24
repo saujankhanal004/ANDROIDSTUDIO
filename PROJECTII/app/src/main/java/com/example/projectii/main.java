@@ -1,19 +1,18 @@
 package com.example.projectii;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import android.view.MenuItem;
-import android.view.Menu;
-import android.content.Intent;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 
 
@@ -99,7 +98,7 @@ public class main extends AppCompatActivity {
 
 
     private void openCREATEACCOUNTPage() {
-        Intent intent = new Intent(this, CREATEACCOUNT.class);
+        Intent intent = new Intent(this, CreateAccountActivity.class);
         startActivity(intent);
     }
 
