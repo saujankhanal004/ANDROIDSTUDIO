@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class main extends AppCompatActivity {
-    Button frag1, frag2, frag3;
+    Button frag1, frag2;
     LinearLayout linlayout;
 
     @Override
