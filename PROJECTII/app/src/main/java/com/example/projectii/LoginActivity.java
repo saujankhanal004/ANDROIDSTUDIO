@@ -41,9 +41,20 @@ public class LoginActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Login success
                                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                                Toast.makeText(LoginActivity.this, "Login successful.", Toast.LENGTH_SHORT).show();
-                                // Proceed to the next activity
-                                startActivity(new Intent(LoginActivity.this, Login_home.class));
+                                String uid = user.getUid();
+                                String email = user.getEmail();
+
+
+                                // Check if the user is an administrator
+                                if (email != null && email.equals("saujankhanal004@gmail.com")) {
+                                    Toast.makeText(LoginActivity.this, "Admin login successful.", Toast.LENGTH_SHORT).show();
+                                    // Proceed to the admin activity
+                                    startActivity(new Intent(LoginActivity.this, AdminActivity.class));
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "Login successful.", Toast.LENGTH_SHORT).show();
+                                    // Proceed to the regular user activity
+                                    startActivity(new Intent(LoginActivity.this, Login_home.class));
+                                }
                                 finish();
                             } else {
                                 // Login failed

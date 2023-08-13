@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="16dp"
-    android:background="#F2F2F2">
+    android:background="#C04000">
 
     <EditText
         android:id="@+id/et_name"
