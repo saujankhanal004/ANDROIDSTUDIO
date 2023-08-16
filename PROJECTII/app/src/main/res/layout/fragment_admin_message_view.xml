@@ -6,12 +6,24 @@
     android:layout_height="match_parent">
 
     <!-- Add other views or fragments inside the FrameLayout -->
-
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="229dp"
-        android:text="this is admin message"
-        android:textSize="34sp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LIST OF MESSAGE"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="#FF0000"
+        />
+
+    <ListView
+        android:id="@+id/studentList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/><!-- Use a FrameLayout as the container for fragments -->
+
+
+    <!-- Define your ListView here -->
+
+
+
 </FrameLayout>
 

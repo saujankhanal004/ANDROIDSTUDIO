@@ -1,23 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--ctrl +/-->
-
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#BBCCED"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Home">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="363dp"
-        android:layout_height="181dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="13dp"
-        android:text="THIS IS HOME PAGE"
-        android:textColor="@color/white"
-        android:textSize="60sp" />
+    <!-- Header Button -->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LIST OF PRODUCTS"
+        android:id="@+id/detail"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:layout_marginBottom="12sp"
+        />
 
-</FrameLayout>
 
-<!--kjdncnkj-->
+    <!-- List View -->
+    <ListView
+        android:id="@+id/listofproduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+    android:divider="@android:color/transparent"
+    android:dividerHeight="16dp"
+    />
+
+</LinearLayout>

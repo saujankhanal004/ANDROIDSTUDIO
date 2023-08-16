@@ -2,6 +2,7 @@ package com.example.projectii;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -20,6 +21,20 @@ public class DBConnection extends SQLiteOpenHelper {
 
         String goodsQuery = "CREATE TABLE Goods(id INTEGER PRIMARY KEY, productname TEXT, price INTEGER, productqty INTEGER, productdes TEXT)";
         sqLiteDatabase.execSQL(goodsQuery);
+    }
+
+    public Cursor selectStudents(){
+        SQLiteDatabase db= this.getReadableDatabase();
+        String query="Select * from AdminMessage ";
+        Cursor cursor=db.rawQuery(query,null);
+        return cursor;
+    }
+
+    public Cursor selectProducts() {
+        SQLiteDatabase db = getReadableDatabase(); // Use the instance method here
+        String query = "Select * from Goods ";
+        Cursor cursor = db.rawQuery(query, null);
+        return cursor;
     }
 
     @Override

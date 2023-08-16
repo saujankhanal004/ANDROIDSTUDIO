@@ -1,18 +1,15 @@
 package com.example.projectii;
 
+import android.database.Cursor;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.Cursor;
-import android.widget.ArrayAdapter;
+
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AdminMessageView extends Fragment {
 
@@ -21,7 +18,8 @@ public class AdminMessageView extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
+    private ListView studentList;
+    private DBConnection con;
 
     public AdminMessageView() {
         // Required empty public constructor
@@ -44,18 +42,39 @@ public class AdminMessageView extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        // Initialize DBConnection
-
+        con = new DBConnection(requireContext()); // Initialize DBConnection
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_admin_message_view, container, false);
 
-        return inflater.inflate(R.layout.fragment_admin_message_view, container, false);
+        studentList = view.findViewById(R.id.studentList);
+
+        ArrayList<Integer> id = new ArrayList<>();
+        ArrayList<String> name = new ArrayList<>();
+        ArrayList<String> address = new ArrayList<>();
+        ArrayList<String> phone = new ArrayList<>();
+        ArrayList<String> email = new ArrayList<>();
+        ArrayList<String> message = new ArrayList<>();
+
+        Cursor cursor = con.selectStudents();
+        while (cursor.moveToNext()) {
+            id.add(cursor.getInt(0));
+            name.add(cursor.getString(1));
+            address.add(cursor.getString(2));
+            phone.add(cursor.getString(3));
+            email.add(cursor.getString(4));
+            message.add(cursor.getString(5));
+        }
+        cursor.close();
+
+        ListAdapter adapter = new ListAdapter(
+                requireContext(), id, name, address, phone, email, message
+        );
+        studentList.setAdapter(adapter);
+
+        return view;
     }
-
-
-
 }
