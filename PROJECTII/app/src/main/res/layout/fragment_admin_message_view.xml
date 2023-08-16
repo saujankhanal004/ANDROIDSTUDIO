@@ -15,9 +15,15 @@
         android:textStyle="bold"
         android:textColor="#FF0000"/>
 
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="30dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text=" ID   NAME  Address    Number            Email                  Message"/>
 
     <ListView
         android:id="@+id/studentList"
