@@ -1,29 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <!-- Add other views or fragments inside the FrameLayout -->
+    <!-- Add other views or fragments inside the LinearLayout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="LIST OF MESSAGE"
         android:gravity="center"
         android:textStyle="bold"
-        android:textColor="#FF0000"
-        />
+        android:textColor="#FF0000"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp"/>
 
     <ListView
         android:id="@+id/studentList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/><!-- Use a FrameLayout as the container for fragments -->
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Use a LinearLayout as the container for views -->
 
 
     <!-- Define your ListView here -->
 
 
-
-</FrameLayout>
-
+</LinearLayout>

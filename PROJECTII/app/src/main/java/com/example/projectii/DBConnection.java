@@ -29,6 +29,24 @@ public class DBConnection extends SQLiteOpenHelper {
         Cursor cursor=db.rawQuery(query,null);
         return cursor;
     }
+    public void deleteRecord(int id) {
+        SQLiteDatabase db = getWritableDatabase();
+        String whereClause = "id = ?";
+        String[] whereArgs = { String.valueOf(id) };
+        db.delete("AdminMessage", whereClause, whereArgs);
+        db.close();
+    }
+    public void deleteRecordG(int id) {
+        SQLiteDatabase db = getWritableDatabase();
+        String whereClause = "id = ?";
+        String[] whereArgs = { String.valueOf(id) };
+        db.delete("Goods", whereClause, whereArgs);
+        db.close();
+    }
+
+
+
+
 
     public Cursor selectProducts() {
         SQLiteDatabase db = getReadableDatabase(); // Use the instance method here
