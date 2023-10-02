@@ -26,6 +26,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login" />
+    <Button
+        android:id="@+id/btn_forget"
+        android:layout_width="150dp"
+        android:layout_height="43dp"
+        android:text="FOrget"
+        android:layout_gravity="center"
+        android:backgroundTint="@android:color/holo_red_dark"
+        />
+
+
 
     </LinearLayout>
 

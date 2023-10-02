@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.text.TextUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -35,18 +36,22 @@ public class LoginActivity extends AppCompatActivity {
                 String username = usernameEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
 
+                // Check if username and password are not empty
+                if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+                    Toast.makeText(LoginActivity.this, "Please enter both username and password.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 // Authenticate user
                 firebaseAuth.signInWithEmailAndPassword(username, password)
                         .addOnCompleteListener(LoginActivity.this, task -> {
                             if (task.isSuccessful()) {
                                 // Login success
                                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                                String uid = user.getUid();
-                                String email = user.getEmail();
-
+                                String email = (user != null) ? user.getEmail() : "";
 
                                 // Check if the user is an administrator
-                                if (email != null && email.equals("saujankhanal004@gmail.com")) {
+                                if (!TextUtils.isEmpty(email) && email.equals("saujankhanal004@gmail.com")) {
                                     Toast.makeText(LoginActivity.this, "Admin login successful.", Toast.LENGTH_SHORT).show();
                                     // Proceed to the admin activity
                                     startActivity(new Intent(LoginActivity.this, AdminActivity.class));
@@ -58,8 +63,13 @@ public class LoginActivity extends AppCompatActivity {
                                 finish();
                             } else {
                                 // Login failed
-                                FirebaseAuthException e = (FirebaseAuthException) task.getException();
-                                Toast.makeText(LoginActivity.this, "Login failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Exception exception = task.getException();
+                                if (exception instanceof FirebaseAuthException) {
+                                    FirebaseAuthException e = (FirebaseAuthException) exception;
+                                    Toast.makeText(LoginActivity.this, "Login failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "Login failed: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
                             }
                         });
             }

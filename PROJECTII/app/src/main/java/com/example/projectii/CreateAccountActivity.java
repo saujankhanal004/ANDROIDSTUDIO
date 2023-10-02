@@ -2,6 +2,7 @@ package com.example.projectii;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +35,12 @@ public class CreateAccountActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = emailEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
+
+                // Validate email and password
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+                    Toast.makeText(CreateAccountActivity.this, "Please enter both email and password.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 // Create a new user account
                 firebaseAuth.createUserWithEmailAndPassword(email, password)
