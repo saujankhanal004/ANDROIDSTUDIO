@@ -14,10 +14,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText usernameEditText, passwordEditText;
     private Button loginButton;
     private FirebaseAuth firebaseAuth;
+
+    // Keep track of login attempts and lockout times
+    private Map<String, Integer> loginAttempts = new HashMap<>();
+    private Map<String, Long> lockoutTimes = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,20 @@ public class LoginActivity extends AppCompatActivity {
                 // Check if username and password are not empty
                 if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
                     Toast.makeText(LoginActivity.this, "Please enter both username and password.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Check if email is temporarily locked out
+                if (lockoutTimes.containsKey(username) && System.currentTimeMillis() - lockoutTimes.get(username) < 10 * 60 * 1000) {
+                    Toast.makeText(LoginActivity.this, "Account temporarily locked. Try again later after 10 min.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Check if login attempts exceed a threshold (e.g., 3 attempts)
+                if (loginAttempts.containsKey(username) && loginAttempts.get(username) >= 3) {
+                    // Lock the account and record the lockout time
+                    lockoutTimes.put(username, System.currentTimeMillis());
+                    Toast.makeText(LoginActivity.this, "Account temporarily locked. Try again later.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -69,6 +90,13 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this, "Login failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Login failed: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+
+                                // Update login attempts
+                                if (loginAttempts.containsKey(username)) {
+                                    loginAttempts.put(username, loginAttempts.get(username) + 1);
+                                } else {
+                                    loginAttempts.put(username, 1);
                                 }
                             }
                         });
