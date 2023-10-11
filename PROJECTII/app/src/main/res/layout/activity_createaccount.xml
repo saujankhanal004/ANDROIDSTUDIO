@@ -32,4 +32,28 @@
         android:layout_height="wrap_content"
         android:text="Create Account" />
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        />
+    <EditText
+        android:id="@+id/randomNumberTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
+    <Button
+        android:id="@+id/generateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Password"
+        android:layout_below="@id/randomNumberTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"/>
+
 </LinearLayout>
