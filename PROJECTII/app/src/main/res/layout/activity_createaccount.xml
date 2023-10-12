@@ -51,7 +51,7 @@
         android:id="@+id/generateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Get Password"
+        android:text= "Generate a random password"
         android:layout_below="@id/randomNumberTextView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="26dp"/>

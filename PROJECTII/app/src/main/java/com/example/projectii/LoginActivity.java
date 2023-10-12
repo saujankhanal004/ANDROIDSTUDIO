@@ -2,11 +2,11 @@ package com.example.projectii;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.text.TextUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,8 +19,9 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText usernameEditText, passwordEditText;
-    private Button loginButton;
+    private Button loginButton, btnForget;
     private FirebaseAuth firebaseAuth;
+    private EditText editTextEmail;
 
     // Keep track of login attempts and lockout times
     private Map<String, Integer> loginAttempts = new HashMap<>();
@@ -34,8 +35,23 @@ public class LoginActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.et_username);
         passwordEditText = findViewById(R.id.et_password);
         loginButton = findViewById(R.id.btn_login);
+        btnForget = findViewById(R.id.btn_forget);
+        editTextEmail = findViewById(R.id.editTextEmail);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        btnForget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = editTextEmail.getText().toString().trim();
+
+                if (!TextUtils.isEmpty(email)) {
+                    sendPasswordResetEmail(email);
+                } else {
+                    Toast.makeText(LoginActivity.this, "Please enter your email.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,5 +118,16 @@ public class LoginActivity extends AppCompatActivity {
                         });
             }
         });
+    }
+
+    private void sendPasswordResetEmail(String email) {
+        firebaseAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(LoginActivity.this, "Password reset email sent to " + email, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Error sending password reset email.", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
